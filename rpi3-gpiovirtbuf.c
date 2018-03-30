@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 		//The result from atoi should be checked for each argument,
 		//but shouldn't go too crazy anyway.
 		gpio_set_config(mb, val, atoi(argv[3]), atoi(argv[4]), atoi(argv[5]), atoi(argv[6]), atoi(argv[7]));
-		fprintf(stderr, "Set config of %d to %s, active %s, %s, state %s\n", val,
+		fprintf(stdout, "Set config of %d to %s, active %s, %s, state %s\n", val,
 				atoi(argv[3]) ? "output" : "input",
 				atoi(argv[4]) ? "low" : "high",
 				atoi(argv[5]) ? (atoi(argv[6]) ? "pulled high" : "pulled low") : "no termination",
@@ -183,10 +183,10 @@ int main(int argc, char *argv[])
 		int output, active_low, term_en, pull_up;
 		int state = gpio_get(mb, val);
 
-		fprintf(stderr, "Get state of %d as %d\n", val, state);
+		fprintf(stdout, "Get state of %d as %d\n", val, state);
 
 		gpio_get_config(mb, val, &output, &active_low, &term_en, &pull_up);
-		fprintf(stderr, "get_config dir %s, active %s, %s\n",
+		fprintf(stdout, "get_config dir %s, active %s, %s\n",
 			output ? "output" : "input",
 			active_low ? "low (inverted)" : "high",
 			term_en ? (pull_up ? "pulled high" : "pulled low") : "not terminated"
@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		gpio_set(mb, val, atoi(argv[3]));
-		fprintf(stderr, "Set state of %d to %d\n", val, atoi(argv[3]));
+		fprintf(stdout, "Set state of %d to %d\n", val, atoi(argv[3]));
 	}
 
 	rpi_firmware_close(mb);
